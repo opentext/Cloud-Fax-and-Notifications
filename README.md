@@ -5,10 +5,10 @@ It uses OpenText messaging system and Google Firebase to send the notification.
 
 The Postman file contains placeholders that should be filled with actual values.
 The placeholders are:
-name: NAME OF YOUR APPLICATION
-user name: YOUR USER NAME
-password: YOUR PASSWORD
-data: REPLACE WITH YOUR 64BIT ENCODED JSON REQUEST FILE
+* name: NAME OF YOUR APPLICATION
+* user name: YOUR USER NAME
+* password: YOUR PASSWORD
+* data: REPLACE WITH YOUR 64BIT ENCODED JSON REQUEST FILE
 
 Use Import option in Postman to create a new collection.
 
