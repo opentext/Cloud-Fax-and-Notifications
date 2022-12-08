@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "7c5444c4-9ef1-499a-bb98-8f389e4121ff",
+		"name": "Sample Push Notification",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "NAME OF YOUR APPLICATION",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "YOUR PASSWORD",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "YOUR USER NAME",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"domain\": \"MR\",\r\n\"filename\":\"REPLACE WITH YOUR JSON FILE NAME\",\r\n\"data\": \"REPLACE WITH YOUR 64BIT ENCODED JSON REQUEST FILE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/utils/parser",
+					"protocol": "https",
+					"host": [
+						"t2api",
+						"us",
+						"cloudmessaging",
+						"opentext",
+						"com"
+					],
+					"path": [
+						"mra",
+						"v1",
+						"utils",
+						"parser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
