@@ -1,0 +1,427 @@
+{
+	"info": {
+		"_postman_id": "f1a93113-3896-4092-abae-aa52a852a909",
+		"name": "Notifications",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16571811"
+	},
+	"item": [
+		{
+			"name": "Authenticate",
+			"item": [
+				{
+					"name": "Get Tenant Access Token /w Client Credentials grant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Validate response', function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"})",
+									"if (responseBody.has(\"access_token\")) {",
+									"    var jsonData = JSON.parse(responseBody);",
+									"    postman.setEnvironmentVariable(\"tenant_access_token\", jsonData.access_token);",
+									"    console.log(postman.getEnvironmentVariable(\"tenant_access_token\"));",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{app_confclient_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{app_confclient_id}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{api_host}}/tenants/{{tenant_id}}/oauth2/token",
+							"protocol": "https",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"tenants",
+								"{{tenant_id}}",
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Email",
+			"item": [
+				{
+					"name": "Email Submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Validate response', function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})\r",
+									"if (responseBody.has(\"job_id\")) {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    postman.setEnvironmentVariable(\"email_job_id\", jsonData.job_id);\r",
+									"    console.log(postman.getEnvironmentVariable(\"email_job_id\"));\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"options\": {\r\n        \"email_options\": {\r\n            \"subject\": \"Test Email from my app\"\r\n            \r\n        }\r\n    },\r\n    \"destinations\": [\r\n        {\r\n            \"ref\": \"1\",\r\n            \"email\": \"{{email_recipient_1}}\"\r\n        },\r\n        {\r\n            \"ref\": \"2\",\r\n            \"email\": \"{{email_recipient_2}}\"\r\n        }\r\n    ],\r\n    \"body\": [\r\n        {\r\n            \"name\": \"temp.txt\",\r\n            \"type\": \"text\",\r\n            \"charset\": \"ISO-8859-1\",\r\n            \"data\": \"SGkgVGhlcmUsIFRoaXMgaXMgYSB0ZXN0IERvY3VtZW50Lg==\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{odn_url}}/outbound/emails",
+							"host": [
+								"{{odn_url}}"
+							],
+							"path": [
+								"outbound",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Validate response', function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{odn_url}}/outbound/emails/status?job_id={{email_job_id}}",
+							"host": [
+								"{{odn_url}}"
+							],
+							"path": [
+								"outbound",
+								"emails",
+								"status"
+							],
+							"query": [
+								{
+									"key": "job_id",
+									"value": "{{email_job_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SMS",
+			"item": [
+				{
+					"name": "SMS Submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Validate response', function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})\r",
+									"if (responseBody.has(\"job_id\")) {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    postman.setEnvironmentVariable(\"sms_job_id\", jsonData.job_id);\r",
+									"    console.log(postman.getEnvironmentVariable(\"sms_job_id\"));\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"destinations\": [\n        {\n            \"sms\": \"{{sms_recipient_1}}\"\n        },\n        {\n            \"sms\": \"{{sms_recipient_2}}\"\n        }\n    ],\n    \"sms_text\": \"Hi There, This is a Test SMS from my app\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{odn_url}}/outbound/sms",
+							"host": [
+								"{{odn_url}}"
+							],
+							"path": [
+								"outbound",
+								"sms"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SMS Status",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Validate response', function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{odn_url}}/outbound/sms/status?job_id={{sms_job_id}}",
+							"host": [
+								"{{odn_url}}"
+							],
+							"path": [
+								"outbound",
+								"sms",
+								"status"
+							],
+							"query": [
+								{
+									"key": "job_id",
+									"value": "{{sms_job_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Fax",
+			"item": [
+				{
+					"name": "Fax Submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Validate response', function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})\r",
+									"if (responseBody.has(\"job_id\")) {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    postman.setEnvironmentVariable(\"fax_job_id\", jsonData.job_id);\r",
+									"    console.log(postman.getEnvironmentVariable(\"fax_job_id\"));\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"destinations\": [\n        {\n            \"fax\": \"{{fax_recipient_1}}\"\n        }\n    ],\n    \"documents\": [\n        {\n            \"name\": \"temp.txt\",\n            \"type\": \"text\",\n            \"data\": \"SGkgVGhlcmUsIFRoaXMgaXMgYSB0ZXN0IERvY3VtZW50Lg==\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{odn_url}}/outbound/faxes",
+							"host": [
+								"{{odn_url}}"
+							],
+							"path": [
+								"outbound",
+								"faxes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fax Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Validate response', function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{odn_url}}/outbound/faxes/status?job_id={{fax_job_id}}",
+							"host": [
+								"{{odn_url}}"
+							],
+							"path": [
+								"outbound",
+								"faxes",
+								"status"
+							],
+							"query": [
+								{
+									"key": "job_id",
+									"value": "{{fax_job_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{tenant_access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
