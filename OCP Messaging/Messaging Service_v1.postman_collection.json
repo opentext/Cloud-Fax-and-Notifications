@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "f1a93113-3896-4092-abae-aa52a852a909",
-		"name": "Notifications",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "16571811"
+		"_postman_id": "08f655d3-17e5-43d5-8c7f-1f6763880824",
+		"name": "Messaging Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -385,6 +384,118 @@
 								{
 									"key": "job_id",
 									"value": "{{fax_job_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WhatsApp",
+			"item": [
+				{
+					"name": "WhatsApp Template Message Submit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Validate response', function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})\r",
+									"if (responseBody.has(\"job_id\")) {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    postman.setEnvironmentVariable(\"whatsapp_job_id\", jsonData.job_id);\r",
+									"    console.log(postman.getEnvironmentVariable(\"whatsapp_job_id\"));\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"destinations\": [\n        {\n            \"whatsapp\": \"{{whatsapp_recipient_1}}\"\n        }\n    ],\n    \"whatsapp_template_message\": {\n        \"template_message\": {\n            \"channel_template\": {\n                \"WHATSAPP\": {\n                    \"template_id\": \"util_trial\",\n                    \"language_code\": \"en\",\n                    \"parameters\": {\n                        \"body[1]text\": \"Trialist\",\n                        \"header[1]image.link\": \"https://us.v-cdn.net/6030023/uploads/O2100HB8PSNH/ot-icon-color-403x.png\"\n                    }\n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{odn_url}}/outbound/whatsapp/template_message",
+							"host": [
+								"{{odn_url}}"
+							],
+							"path": [
+								"outbound",
+								"whatsapp",
+								"template_message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WhatsApp Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Validate response', function () {\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{odn_url}}/outbound/whatsapp/status?job_id={{whatsapp_job_id}}",
+							"host": [
+								"{{odn_url}}"
+							],
+							"path": [
+								"outbound",
+								"whatsapp",
+								"status"
+							],
+							"query": [
+								{
+									"key": "job_id",
+									"value": "{{whatsapp_job_id}}"
 								}
 							]
 						}
