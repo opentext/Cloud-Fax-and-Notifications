@@ -1,0 +1,580 @@
+{
+	"info": {
+		"_postman_id": "99a4125b-d7ca-4a90-b3f3-9687d4fbe3f9",
+		"name": "WhatsApp 2-way",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "WhatsApp Webhook",
+			"item": [
+				{
+					"name": "WhatsApp Webhook Post URL",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"url\": \"https://example.com/image.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/inbound/whatsapp/messages/webhook",
+							"protocol": "https",
+							"host": [
+								"t2api",
+								"us",
+								"cloudmessaging",
+								"opentext",
+								"com"
+							],
+							"path": [
+								"mra",
+								"v1",
+								"inbound",
+								"whatsapp",
+								"messages",
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WhatsApp Webhook Delete",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/inbound/whatsapp/messages/webhook",
+							"protocol": "https",
+							"host": [
+								"t2api",
+								"us",
+								"cloudmessaging",
+								"opentext",
+								"com"
+							],
+							"path": [
+								"mra",
+								"v1",
+								"inbound",
+								"whatsapp",
+								"messages",
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WhatsApp Webhook Get",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/inbound/whatsapp/messages/webhook",
+							"protocol": "https",
+							"host": [
+								"t2api",
+								"us",
+								"cloudmessaging",
+								"opentext",
+								"com"
+							],
+							"path": [
+								"mra",
+								"v1",
+								"inbound",
+								"whatsapp",
+								"messages",
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WhatsApp Submit Template",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"uuid": "0f019d3c-b538-4370-b696-d89d29706699"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"destinations\": [\r\n        {\r\n            \"whatsapp\": \"9999999999\"\r\n        }\r\n    ],\r\n    \"whatsapp_template_message\": {\r\n        \"template_message\": {\r\n            \"channel_template\": {\r\n                \"WHATSAPP\": {\r\n                    \"template_id\": \"util_1\",\r\n                    \"language_code\": \"en\",\r\n                    \"parameters\": {\r\n                        \"body[1]text\": \"abc-def-ghijkl\"\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/outbound/whatsapp/template_message",
+					"protocol": "https",
+					"host": [
+						"t2api",
+						"us",
+						"cloudmessaging",
+						"opentext",
+						"com"
+					],
+					"path": [
+						"mra",
+						"v1",
+						"outbound",
+						"whatsapp",
+						"template_message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WhatsApp Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/outbound/whatsapp/status?job_id=xsi-99999999",
+					"protocol": "https",
+					"host": [
+						"t2api",
+						"us",
+						"cloudmessaging",
+						"opentext",
+						"com"
+					],
+					"path": [
+						"mra",
+						"v1",
+						"outbound",
+						"whatsapp",
+						"status"
+					],
+					"query": [
+						{
+							"key": "job_id",
+							"value": "xsi-99999999"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WhatsApp Submit Text",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"destinations\": [\r\n        {\r\n            \"whatsapp\": \"9999999999\"\r\n        }\r\n    ],\r\n    \"whatsapp_message\": {\r\n        \"text_message\": {\r\n            \"text\": \"Sample Text Message\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/outbound/whatsapp",
+					"protocol": "https",
+					"host": [
+						"t2api",
+						"us",
+						"cloudmessaging",
+						"opentext",
+						"com"
+					],
+					"path": [
+						"mra",
+						"v1",
+						"outbound",
+						"whatsapp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WhatsApp Submit Media",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"destinations\": [\r\n        {\r\n            \"whatsapp\": \"9999999999\"\r\n        }\r\n    ],\r\n    \"whatsapp_message\": {\r\n        \"media_message\": {\r\n            \"url\": \"https://example.com/image.jpg\"\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/outbound/whatsapp",
+					"protocol": "https",
+					"host": [
+						"t2api",
+						"us",
+						"cloudmessaging",
+						"opentext",
+						"com"
+					],
+					"path": [
+						"mra",
+						"v1",
+						"outbound",
+						"whatsapp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WhatsApp Submit Location",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"destinations\": [\r\n        {\r\n            \"whatsapp\": \"9999999999\"\r\n        }\r\n    ],\r\n    \"whatsapp_message\": {\r\n        \"location_message\": {\r\n            \"title\": \"OpenText\",\r\n            \"label\": \"OpenText Office\",\r\n            \"coordinates\": {\r\n                \"latitude\": 40.26794924028785,\r\n                \"longitude\": -74.08294341521915\r\n            }\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/outbound/whatsapp",
+					"protocol": "https",
+					"host": [
+						"t2api",
+						"us",
+						"cloudmessaging",
+						"opentext",
+						"com"
+					],
+					"path": [
+						"mra",
+						"v1",
+						"outbound",
+						"whatsapp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WhatsApp Submit Card",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"destinations\": [\r\n        {\r\n            \"whatsapp\": \"9999999999\"\r\n        }\r\n    ],\r\n    \"whatsapp_message\": {\r\n        \"card_message\": {\r\n            \"title\": \"Sample Card Title\",\r\n            \"description\": \"Sample Card Description\",\r\n            \"height\": \"SHORT\",\r\n            \"media_message\": {\r\n                \"url\": \"https://example.com/image.jpg\"\r\n            },\r\n            \"choices\": [\r\n                {\r\n                    \"text_message\": {\r\n                        \"text\": \"Sample Text Message 1\"\r\n                    },\r\n                    \"postback_data\": \"Sample Postback Data 1\"\r\n                },\r\n                {\r\n                    \"text_message\": {\r\n                        \"text\": \"Sample Text Message 2\"\r\n                    },\r\n                    \"postback_data\": \"Sample Postback Data 2\"\r\n                },\r\n                {\r\n                    \"text_message\": {\r\n                        \"text\": \"Sample Text Message 3\"\r\n                    },\r\n                    \"postback_data\": \"Sample Postback Data 3\"\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/outbound/whatsapp",
+					"protocol": "https",
+					"host": [
+						"t2api",
+						"us",
+						"cloudmessaging",
+						"opentext",
+						"com"
+					],
+					"path": [
+						"mra",
+						"v1",
+						"outbound",
+						"whatsapp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WhatsApp Submit Choice",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"destinations\": [\r\n        {\r\n            \"whatsapp\": \"9999999999\"\r\n        }\r\n    ],\r\n    \"whatsapp_message\": {\r\n        \"choice_message\": {\r\n            \"text_message\": {\r\n                \"text\": \"Sample Text Message\"\r\n            },\r\n            \"choices\": [\r\n                {\r\n                    \"text_message\": {\r\n                        \"text\": \"Sample Choice 1\"\r\n                    },\r\n                    \"postback_data\": \"Sample Postback Data 1\"\r\n                },\r\n                {\r\n                    \"text_message\": {\r\n                        \"text\": \"Sample Choice 2\"\r\n                    },\r\n                    \"postback_data\": \"Sample Postback Data 2\"\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/outbound/whatsapp",
+					"protocol": "https",
+					"host": [
+						"t2api",
+						"us",
+						"cloudmessaging",
+						"opentext",
+						"com"
+					],
+					"path": [
+						"mra",
+						"v1",
+						"outbound",
+						"whatsapp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WhatsApp Submit List",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "password",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "username",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"destinations\": [\r\n        {\r\n            \"whatsapp\": \"9999999999\"\r\n        }\r\n    ],\r\n    \"whatsapp_message\": {\r\n        \"list_message\": {\r\n            \"title\": \"Sample List Title\",\r\n            \"description\": \"Sample List Description\",\r\n            \"sections\": [\r\n                {\r\n                    \"title\": \"Sample Section Title\",\r\n                    \"description\": \"Sample Section Description\",\r\n                    \"items\": [\r\n                        {\r\n                            \"choice\": {\r\n                                \"title\": \"Sample Choice Title 1\",\r\n                                \"description\": \"Sample Choice Description 1\",\r\n                                \"postback_data\": \"Sample Choice Postback Data 1\"\r\n                            }\r\n                        },\r\n                        {\r\n                            \"choice\": {\r\n                                \"title\": \"Sample Choice Title 2\",\r\n                                \"description\": \"Sample Choice Description 2\",\r\n                                \"postback_data\": \"Sample Choice Postback Data 2\"\r\n                            }\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://t2api.us.cloudmessaging.opentext.com/mra/v1/outbound/whatsapp",
+					"protocol": "https",
+					"host": [
+						"t2api",
+						"us",
+						"cloudmessaging",
+						"opentext",
+						"com"
+					],
+					"path": [
+						"mra",
+						"v1",
+						"outbound",
+						"whatsapp"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
